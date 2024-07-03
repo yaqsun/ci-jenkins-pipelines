@@ -67,7 +67,8 @@ node('worker') {
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
-
+            println remoteConfigs
+            println repoBranch
             // Checkout into user repository
             checkoutUserPipelines()
             println "=====================end"
