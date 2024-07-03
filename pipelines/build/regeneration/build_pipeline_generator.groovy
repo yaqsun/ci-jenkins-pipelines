@@ -70,6 +70,7 @@ node('worker') {
 
             // Checkout into user repository
             checkoutUserPipelines()
+            println "=====================end"
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
             library(identifier: "openjdk-jenkins-helper@${helperRef}")
