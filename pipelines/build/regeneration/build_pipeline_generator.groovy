@@ -75,7 +75,7 @@ node('worker') {
             sh "pwd"
             //println "${JOB_ROOT}"
             // Checkout into user repository
-            checkoutUserPipelines()
+            //checkoutUserPipelines()
             println "=====================end"
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
