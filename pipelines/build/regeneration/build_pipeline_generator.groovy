@@ -70,8 +70,8 @@ node('worker') {
             }
             println remoteConfigs
             println repoBranch
-            sh "ls ${WORKSPACE}"
             println "=====================start"
+            sh "ls ${WORKSPACE}"
             //println "${JOB_ROOT}"
             // Checkout into user repository
             //checkoutUserPipelines()
