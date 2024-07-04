@@ -25,7 +25,7 @@ node('worker') {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
         }
 
-        Map remoteConfigs = [:]
+        //Map remoteConfigs = [:]
         def repoBranch = null
 
     /*
@@ -41,7 +41,7 @@ node('worker') {
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
-            remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
+            Map remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
             repoBranch = "master"
         def checkoutUserPipelines = { ->
             checkout([$class: 'GitSCM',
