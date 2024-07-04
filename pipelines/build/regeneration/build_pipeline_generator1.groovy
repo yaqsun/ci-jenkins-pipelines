@@ -42,7 +42,7 @@ node('worker') {
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
-            def remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
+            Map remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
             def repoBranch = "master"
         def checkoutUserPipelines = { ->
             checkout([$class: 'GitSCM',
