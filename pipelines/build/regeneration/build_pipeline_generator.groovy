@@ -13,7 +13,6 @@ node('worker') {
         String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
         def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
-        println ADOPT_DEFAULTS_JSON 
         if (!ADOPT_DEFAULTS_JSON || !Map.isInstance(ADOPT_DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No ADOPT_DEFAULTS_JSON found at ${ADOPT_DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file. NOTE: Since this adopt's defaults and unlikely to change location, this is likely a network or GitHub issue.")
         }
@@ -68,14 +67,8 @@ node('worker') {
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
-            println remoteConfigs
-            println repoBranch
-            println "=====================start"
-            //sh "ls ${WORKSPACE}"
-            //println "${JOB_ROOT}"
             // Checkout into user repository
-            //checkoutUserPipelines()
-            println "=====================end"
+            checkoutUserPipelines()
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
             library(identifier: "openjdk-jenkins-helper@${helperRef}")
