@@ -31,12 +31,14 @@ node('worker') {
     /*
     Changes dir to Adopt's repo. Use closures as functions aren't accepted inside node blocks
     */
+/*
         def checkoutAdoptPipelines = { ->
             checkout([$class: 'GitSCM',
                 branches: [ [ name: ADOPT_DEFAULTS_JSON['repository']['pipeline_branch'] ] ],
                 userRemoteConfigs: [ [ url: ADOPT_DEFAULTS_JSON['repository']['pipeline_url'] ] ]
             ])
         }
+*/
 
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
