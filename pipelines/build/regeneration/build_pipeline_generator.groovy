@@ -53,12 +53,13 @@ node('worker') {
             def generatedPipelines = []
 
             // Load git url and branch and gitBranch. These determine where we will be pulling user configs from.
-            def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
-            repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
-
+            //def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
+            //repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
+            repoBranch = "master"
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
-            remoteConfigs = [ url: repoUri ]
+            //remoteConfigs = [ url: repoUri ]
+            remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
