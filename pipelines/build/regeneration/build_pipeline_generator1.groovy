@@ -26,7 +26,7 @@ node('worker') {
         }
 
         //Map remoteConfigs = [:]
-        def repoBranch = null
+        //def repoBranch = null
 
     /*
     Changes dir to Adopt's repo. Use closures as functions aren't accepted inside node blocks
@@ -42,7 +42,7 @@ node('worker') {
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
             def remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
-            repoBranch = "master"
+            def repoBranch = "master"
         def checkoutUserPipelines = { ->
             checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
