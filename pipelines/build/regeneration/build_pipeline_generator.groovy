@@ -9,8 +9,8 @@ file used as jenkinsfile to generator nightly and weekly pipeline
 node('worker') {
     try {
         // Pull in Adopt defaults
-        String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
-        //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
+        //String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
+        String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
         def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         println ADOPT_DEFAULTS_JSON 
