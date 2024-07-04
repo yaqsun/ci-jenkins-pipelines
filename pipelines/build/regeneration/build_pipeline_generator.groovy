@@ -75,6 +75,7 @@ node('worker') {
 
             // Load jobRoot. This is where the openjdkxx-pipeline jobs will be created.
             def jobRoot = (params.JOB_ROOT) ?: DEFAULTS_JSON['jenkinsDetails']['rootDirectory']
+            println jobRoot
 
         /*
         Load scriptFolderPath. This is the folder where the openjdk_pipeline.groovy code is located compared to the repository root.
