@@ -81,6 +81,7 @@ node('worker') {
         These are the top level pipeline jobs.
         */
             def scriptFolderPath = (params.SCRIPT_FOLDER_PATH) ?: DEFAULTS_JSON['scriptDirectories']['upstream']
+            println scriptFolderPath
 
             if (!fileExists(scriptFolderPath)) {
                 println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
