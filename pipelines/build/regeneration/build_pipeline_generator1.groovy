@@ -13,7 +13,7 @@ node('worker') {
         String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
         def getAdopt = null
         try {
-        def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
+        getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
          } catch (IOException e) {
         e.printStackTrace();
         }
