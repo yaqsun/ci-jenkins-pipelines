@@ -8,6 +8,7 @@ file used as jenkinsfile to generator nightly and weekly pipeline
 
 node('worker') {
     try {
+/*
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
         //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
@@ -25,9 +26,9 @@ node('worker') {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
         }
 
-        //Map remoteConfigs = [:]
-        //def repoBranch = null
-
+        Map remoteConfigs = [:]
+        def repoBranch = null
+*/
     /*
     Changes dir to Adopt's repo. Use closures as functions aren't accepted inside node blocks
     */
