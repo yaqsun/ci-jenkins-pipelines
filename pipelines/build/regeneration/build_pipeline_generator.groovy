@@ -43,10 +43,10 @@ node('worker') {
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
         def checkoutUserPipelines = { ->
-            checkout([$class: 'GitSCM',
-                branches: [ [ name: repoBranch ] ],
-                userRemoteConfigs: [ remoteConfigs ]
-            ])
+            //checkout([$class: 'GitSCM',
+            //    branches: [ [ name: repoBranch ] ],
+            //    userRemoteConfigs: [ remoteConfigs ]
+            //])
             //git branch: 'master', url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git'
             //sh "git log -4"
         }
