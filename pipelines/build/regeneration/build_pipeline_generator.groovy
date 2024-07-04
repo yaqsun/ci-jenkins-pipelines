@@ -10,6 +10,7 @@ node('worker') {
     try {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
+/*
         def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         if (!ADOPT_DEFAULTS_JSON || !Map.isInstance(ADOPT_DEFAULTS_JSON)) {
@@ -23,10 +24,9 @@ node('worker') {
         if (!DEFAULTS_JSON || !Map.isInstance(DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
         }
-
-        //Map remoteConfigs = [:]
-        //def remoteConfigs = null
-        //def repoBranch = null
+*/
+        Map remoteConfigs = [:]
+        def repoBranch = null
 
     /*
     Changes dir to Adopt's repo. Use closures as functions aren't accepted inside node blocks
@@ -41,9 +41,6 @@ node('worker') {
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
-
-        def remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
-        def repoBranch = "master"
         def checkoutUserPipelines = { ->
             checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
@@ -57,11 +54,11 @@ node('worker') {
 
             // Load git url and branch and gitBranch. These determine where we will be pulling user configs from.
             def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
-            //repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
+            repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
 
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
-            //remoteConfigs = [ url: repoUri ]
+            remoteConfigs = [ url: repoUri ]
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
