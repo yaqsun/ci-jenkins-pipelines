@@ -25,7 +25,7 @@ node('worker') {
         }
 
         //Map remoteConfigs = [:]
-        def remoteConfigs = null
+        //def remoteConfigs = null
         def repoBranch = null
 
     /*
@@ -41,6 +41,8 @@ node('worker') {
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
+
+        def remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
         def checkoutUserPipelines = { ->
             checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
@@ -58,7 +60,7 @@ node('worker') {
 
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
-            remoteConfigs = [ url: repoUri ]
+            //remoteConfigs = [ url: repoUri ]
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
