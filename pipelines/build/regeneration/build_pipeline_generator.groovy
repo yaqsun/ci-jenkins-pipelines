@@ -70,7 +70,6 @@ node('worker') {
             }
             println remoteConfigs
             println repoBranch
-            println "${WORKSPACE}"
             sh "ls ${WORKSPACE}"
             println "=====================start"
             //println "${JOB_ROOT}"
