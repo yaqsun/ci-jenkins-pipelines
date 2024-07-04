@@ -62,6 +62,7 @@ node('worker') {
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
             //remoteConfigs = [ url: repoUri ]
             remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
+            repoBranch = "master"
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
