@@ -8,6 +8,7 @@ file used as jenkinsfile to generator nightly and weekly pipeline
 
 node('worker') {
     try {
+/*
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
         //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
@@ -27,6 +28,7 @@ node('worker') {
 
         Map remoteConfigs = [:]
         def repoBranch = null
+*/
 
     /*
     Changes dir to Adopt's repo. Use closures as functions aren't accepted inside node blocks
@@ -51,24 +53,26 @@ node('worker') {
         }
 
         timestamps {
-            def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
-            def generatedPipelines = []
+            //def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
+            //def generatedPipelines = []
 
             // Load git url and branch and gitBranch. These determine where we will be pulling user configs from.
-            def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
-            repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
+            //def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
+            //repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
 
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
             //remoteConfigs = [ url: repoUri ]
-            remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
-            repoBranch = "master"
+            def remoteConfigs = [ url: "https://github.com/adoptium/ci-jenkins-pipelines.git" ]
+            def repoBranch = "master"
+/*
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
+*/
             // Checkout into user repository
             checkoutUserPipelines()
        }
