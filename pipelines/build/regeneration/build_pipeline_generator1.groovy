@@ -23,7 +23,7 @@ node('worker') {
 */
        def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-       def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
+       //def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
 /*
          Map<String, ?> ADOPT_DEFAULTS_JSON = [:]
         try {
