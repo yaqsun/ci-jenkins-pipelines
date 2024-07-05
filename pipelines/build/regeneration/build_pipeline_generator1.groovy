@@ -10,7 +10,7 @@ node('worker') {
 //    try {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
-        //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
+        String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
         //def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         //def getAdopt = null
         URL getAdoptUrl  = new URL(ADOPT_DEFAULTS_FILE_URL)
