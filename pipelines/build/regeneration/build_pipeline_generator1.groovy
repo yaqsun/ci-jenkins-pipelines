@@ -74,7 +74,7 @@ node('worker') {
             //sh "git log -4"
         }
 
-        timestamps {
+        //timestamps {
             //def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
             //def generatedPipelines = []
 
@@ -83,7 +83,7 @@ node('worker') {
             //repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
 
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
-            def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
+            //def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
             //remoteConfigs = [ url: repoUri ]
 /*
             if (checkoutCreds != '') {
@@ -94,11 +94,11 @@ node('worker') {
             }
 */
             // Checkout into user repository
-            checkoutUserPipelines()
-       }
+            //checkoutUserPipelines()
+       //}
 //    } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
-        println '[INFO] Cleaning up...'
+        //println '[INFO] Cleaning up...'
         //cleanWs deleteDirs: true
 //    }
 }
