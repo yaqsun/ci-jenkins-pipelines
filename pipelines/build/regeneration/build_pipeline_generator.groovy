@@ -66,17 +66,17 @@ node('worker') {
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
-            remoteConfigs = [ url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git']
-            repoBranch = "master"
-            dir("$WORKSPACE/ci-jenkins-pipelines") {
-              deleteDir()
-              git branch: 'master', url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git'
-              sh "git log -4"
-            }
+            //remoteConfigs = [ url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git']
+            //repoBranch = "master"
+            //dir("$WORKSPACE/ci-jenkins-pipelines") {
+            //  deleteDir()
+            //  git branch: 'master', url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git'
+            //  sh "git log -4"
+            //}
 
             // Checkout into user repository
             //try {
-            //checkoutUserPipelines()
+            checkoutUserPipelines()
             //} catch (IOException e) {
             //   e.printStackTrace();
             //}
