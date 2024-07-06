@@ -64,7 +64,7 @@ node('worker') {
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
-            remoteConfigs = [ url: "ssh://sunyaqi@rd.loongson.cn:29418/vm-test" ]
+            remoteConfigs = [ url: 'http://jvm-ci@rd.loongson.cn:8081/a/vm-infra', credentialsId: 'd80a9cda-a692-4d40-8cfe-cdb1fcd43112']
             repoBranch = "master"
             // Checkout into user repository
             checkoutUserPipelines()
