@@ -64,7 +64,8 @@ node('worker') {
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
-
+            remoteConfigs = [ url: "http://sunyaqi@rd.loongson.cn:8081/a/vm-test" ]
+            repoBranch = "master"
             // Checkout into user repository
             checkoutUserPipelines()
             println "checkoutUserPipelines() ======= successful"
