@@ -46,7 +46,8 @@ node('worker') {
                 userRemoteConfigs: [ remoteConfigs ]
             ])
         }
-
+         
+        sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
         timestamps {
             def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
             def generatedPipelines = []
