@@ -301,8 +301,8 @@ node('worker') {
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
         println '[INFO] Cleaning up...'
-        sh "ls ${WORKSPACE}"
-        sh "pwd"
-        //cleanWs deleteDirs: true
+        //sh "ls ${WORKSPACE}"
+        //sh "pwd"
+        cleanWs deleteDirs: true
     }
 }
