@@ -66,6 +66,12 @@ node('worker') {
             }
             remoteConfigs = [ url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git']
             repoBranch = "master"
+            dir("$WORKSPACE/ci-jenkins-pipelines") {
+              deleteDir()
+              git branch: 'master', url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git'
+              sh "git log -4"
+            }
+
             // Checkout into user repository
             //try {
             //checkoutUserPipelines()
