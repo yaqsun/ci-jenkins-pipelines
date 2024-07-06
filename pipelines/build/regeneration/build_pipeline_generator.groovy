@@ -67,6 +67,7 @@ node('worker') {
 
             // Checkout into user repository
             checkoutUserPipelines()
+            println "checkoutUserPipelines() ======= successful"
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
             library(identifier: "openjdk-jenkins-helper@${helperRef}")
@@ -301,8 +302,8 @@ node('worker') {
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
         println '[INFO] Cleaning up...'
-        //sh "ls ${WORKSPACE}"
-        //sh "pwd"
-        cleanWs deleteDirs: true
+        sh "ls ${WORKSPACE}"
+        sh "pwd"
+        //cleanWs deleteDirs: true
     }
 }
