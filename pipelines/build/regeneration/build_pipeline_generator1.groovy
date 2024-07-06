@@ -46,8 +46,8 @@ node('worker') {
         }
 */
 
-        //Map remoteConfigs = [:]
-        //def repoBranch = null
+        Map remoteConfigs = [:]
+        def repoBranch = null
     /*
     Changes dir to Adopt's repo. Use closures as functions aren't accepted inside node blocks
     */
