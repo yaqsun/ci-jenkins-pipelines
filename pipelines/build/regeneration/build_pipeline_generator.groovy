@@ -67,7 +67,11 @@ node('worker') {
             remoteConfigs = [ url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git']
             repoBranch = "master"
             // Checkout into user repository
+            try {
             checkoutUserPipelines()
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
             println "checkoutUserPipelines() ======= successful"
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
