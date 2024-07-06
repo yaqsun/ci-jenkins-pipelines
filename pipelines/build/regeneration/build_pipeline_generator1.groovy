@@ -13,18 +13,18 @@ node('worker') {
         String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
         //def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         //def getAdopt = null
-        URL getAdoptUrl  = new URL(ADOPT_DEFAULTS_FILE_URL)
-        def getAdopt = getAdoptUrl.openConnection()
+        //URL getAdoptUrl  = new URL(ADOPT_DEFAULTS_FILE_URL)
+        //def getAdopt = getAdoptUrl.openConnection()
         //try {
         //getAdopt = getAdoptUrl.openConnection()
         //println getAdopt
         // } catch (IOException e) {
         //e.printStackTrace();
         //}
-//       def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
+       def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
 //       println TEST_CONF
        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-//       def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
+       def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
 /*
          Map<String, ?> ADOPT_DEFAULTS_JSON = [:]
         try {
