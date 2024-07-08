@@ -298,9 +298,9 @@ node('worker') {
                 println generatedPipelines
             }
             }
-    } finally {
+    //} finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
-        println '[INFO] Cleaning up...'
-        cleanWs deleteDirs: true
+        //println '[INFO] Cleaning up...'
+        //cleanWs deleteDirs: true
     }
 }
