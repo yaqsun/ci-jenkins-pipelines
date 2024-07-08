@@ -8,7 +8,6 @@ file used as jenkinsfile to generator nightly and weekly pipeline
 
 node('worker') {
     try {
-        sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
         def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
@@ -77,7 +76,7 @@ node('worker') {
 
             // Checkout into user repository
             //try {
-            //checkoutUserPipelines()
+            checkoutUserPipelines()
             println "checkoutUserPipelines() ======= 11111"
             //def stash = checkout([$class: 'GitSCM',
             //    branches: [ [ name: repoBranch ] ],
