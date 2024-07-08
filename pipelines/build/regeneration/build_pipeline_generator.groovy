@@ -49,11 +49,11 @@ node('worker') {
         }
          
         sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
+        println "checkoutUserPipelines() ======= 11111"
         //timestamps {
             def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
             def generatedPipelines = []
 
-            println "checkoutUserPipelines() ======= 11111"
             // Load git url and branch and gitBranch. These determine where we will be pulling user configs from.
             def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
             repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
