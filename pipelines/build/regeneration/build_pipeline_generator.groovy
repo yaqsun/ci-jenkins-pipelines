@@ -78,7 +78,7 @@ node('worker') {
 
             // Checkout into user repository
             //try {
-            //checkoutUserPipelines()
+            checkoutUserPipelines()
             //} catch (IOException e) {
             //   e.printStackTrace();
             //}
