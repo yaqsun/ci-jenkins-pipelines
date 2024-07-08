@@ -113,7 +113,7 @@ node('worker') {
         */
             def scriptFolderPath = (params.SCRIPT_FOLDER_PATH) ?: DEFAULTS_JSON['scriptDirectories']['upstream']
             println scriptFolderPath
-            println fileExists(scriptFolderPath)
+            //println fileExists(scriptFolderPath)
             try {
             if (!fileExists(scriptFolderPath)) {
         println "*****************************"
