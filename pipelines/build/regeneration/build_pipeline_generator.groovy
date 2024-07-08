@@ -58,8 +58,8 @@ node('worker') {
 
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
-            //remoteConfigs = [ url: repoUri ]
-            remoteConfigs = [ url: "ssh://sunyaqi@rd.loongson.cn:29418/vm-infra" ]
+            remoteConfigs = [ url: repoUri ]
+            //remoteConfigs = [ url: "ssh://sunyaqi@rd.loongson.cn:29418/vm-infra" ]
             //remoteConfigs = [ url: "https://github.com/adoptium/jenkins-helper.git" ]
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
