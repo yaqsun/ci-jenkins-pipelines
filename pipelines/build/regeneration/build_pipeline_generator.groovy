@@ -49,7 +49,7 @@ node('worker') {
         }
          
         sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
-        timestamps {
+        //timestamps {
             def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
             def generatedPipelines = []
 
@@ -313,7 +313,7 @@ node('worker') {
                 println "[SUCCESS] THE FOLLOWING PIPELINES WERE GENERATED IN THE ${jobRoot} FOLDER"
                 println generatedPipelines
             }
-            }
+            //}
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
         println '[INFO] Cleaning up...'
