@@ -78,7 +78,11 @@ node('worker') {
 
             // Checkout into user repository
             //try {
-            checkoutUserPipelines()
+            //checkoutUserPipelines()
+            checkout([$class: 'GitSCM',
+                branches: [ [ name: repoBranch ] ],
+                userRemoteConfigs: [ remoteConfigs ]
+            ])
             //} catch (IOException e) {
             //   e.printStackTrace();
             //}
