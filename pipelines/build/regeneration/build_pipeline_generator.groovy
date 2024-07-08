@@ -77,7 +77,7 @@ node('worker') {
 
             // Checkout into user repository
             //try {
-            checkoutUserPipelines()
+            //checkoutUserPipelines()
             println "checkoutUserPipelines() ======= 11111"
             def stash = checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
