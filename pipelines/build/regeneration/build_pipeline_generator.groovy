@@ -111,6 +111,7 @@ node('worker') {
             println scriptFolderPath
 
             if (!fileExists(scriptFolderPath)) {
+        println "*****************************1"
                 println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
                 checkoutAdoptPipelines()
                 scriptFolderPath = ADOPT_DEFAULTS_JSON['scriptDirectories']['upstream']
