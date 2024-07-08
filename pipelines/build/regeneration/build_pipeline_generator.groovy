@@ -118,7 +118,7 @@ node('worker') {
                 //println "[SUCCESS] The path is now ${scriptFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
                 //checkoutUserPipelines()
             }
-            } catch (Exception e) {
+            } catch (IOException e) {
             println "checkoutUserPipelines() ======= successful44444"
                e.printStackTrace();
             }
