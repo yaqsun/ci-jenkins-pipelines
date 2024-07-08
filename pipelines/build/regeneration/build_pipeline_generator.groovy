@@ -79,10 +79,11 @@ node('worker') {
             // Checkout into user repository
             //try {
             //checkoutUserPipelines()
-            checkout([$class: 'GitSCM',
+            def stash = checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
                 userRemoteConfigs: [ remoteConfigs ]
             ])
+            println "Checked out commit: ${stash.GIT_COMMIT}"
             //} catch (IOException e) {
             //   e.printStackTrace();
             //}
