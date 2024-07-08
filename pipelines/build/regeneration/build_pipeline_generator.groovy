@@ -46,9 +46,8 @@ node('worker') {
                 userRemoteConfigs: [ remoteConfigs ]
             ])
         }
-         
-        //sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
-        //timestamps {
+
+        timestamps {
             def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
             def generatedPipelines = []
 
@@ -59,48 +58,18 @@ node('worker') {
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
             remoteConfigs = [ url: repoUri ]
-            //remoteConfigs = [ url: "ssh://sunyaqi@rd.loongson.cn:29418/vm-infra" ]
-            //remoteConfigs = [ url: "https://github.com/adoptium/jenkins-helper.git" ]
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
             } else {
                 println "[WARNING] CHECKOUT_CREDENTIALS not specified! Checkout to $repoUri may fail if you do not have your ssh key on this machine."
             }
-            //remoteConfigs = [ url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git']
-            //repoBranch = "master"
-            //dir("$WORKSPACE/ci-jenkins-pipelines") {
-            //  deleteDir()
-            //  git branch: 'master', url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git'
-            //  sh "git log -4"
-            //}
 
             // Checkout into user repository
-            try {
             checkoutUserPipelines()
-            println "checkoutUserPipelines() ======= 11111"
-            //def stash = checkout([$class: 'GitSCM',
-            //    branches: [ [ name: repoBranch ] ],
-            //    userRemoteConfigs: [ remoteConfigs ]
-            //])
-            //println "Checked out commit: ${stash.GIT_COMMIT}"
-            } catch (Exception e) {
-               println "================= IOException e"
-               //println "Checked out commit: ${stash.GIT_COMMIT}"
-               e.printStackTrace();
-            println "checkoutUserPipelines() ======= successful11111eeeeeeeee"
-            }
-            println "checkoutUserPipelines() ======= successful"
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
-            try {
             library(identifier: "openjdk-jenkins-helper@${helperRef}")
-            } catch (Exception e) {
-            println "checkoutUserPipelines() ======= successful22222"
-               e.printStackTrace();
-            println "checkoutUserPipelines() ======= successful22222eeeeeeeee"
-            }
-            println "checkoutUserPipelines() ======= successful33333"
 
             // Load jobRoot. This is where the openjdkxx-pipeline jobs will be created.
             def jobRoot = (params.JOB_ROOT) ?: DEFAULTS_JSON['jenkinsDetails']['rootDirectory']
@@ -110,20 +79,13 @@ node('worker') {
         These are the top level pipeline jobs.
         */
             def scriptFolderPath = (params.SCRIPT_FOLDER_PATH) ?: DEFAULTS_JSON['scriptDirectories']['upstream']
-            println scriptFolderPath
-            println fileExists(scriptFolderPath)
-            try {
+
             if (!fileExists(scriptFolderPath)) {
-        println "*****************************"
-                //println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
-                //checkoutAdoptPipelines()
-                //scriptFolderPath = ADOPT_DEFAULTS_JSON['scriptDirectories']['upstream']
-                //println "[SUCCESS] The path is now ${scriptFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
-                //checkoutUserPipelines()
-            }
-            } catch (IOException e) {
-            println "checkoutUserPipelines() ======= successful44444"
-               e.printStackTrace();
+                println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
+                checkoutAdoptPipelines()
+                scriptFolderPath = ADOPT_DEFAULTS_JSON['scriptDirectories']['upstream']
+                println "[SUCCESS] The path is now ${scriptFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
+                checkoutUserPipelines()
             }
 
         /*
@@ -131,7 +93,6 @@ node('worker') {
         These define what the default set of nightlies will be.
         */
             def nightlyFolderPath = (params.NIGHTLY_FOLDER_PATH) ?: DEFAULTS_JSON['configDirectories']['nightly']
-            println "nightlyFolderPath ===== ${nightlyFolderPath}"
 
             if (!fileExists(nightlyFolderPath)) {
                 println "[WARNING] ${nightlyFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
@@ -336,12 +297,10 @@ node('worker') {
                 println "[SUCCESS] THE FOLLOWING PIPELINES WERE GENERATED IN THE ${jobRoot} FOLDER"
                 println generatedPipelines
             }
-            //}
+            }
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
         println '[INFO] Cleaning up...'
-        sh "ls ${WORKSPACE}"
-        sh "pwd"
-        //cleanWs deleteDirs: true
+        cleanWs deleteDirs: true
     }
 }
