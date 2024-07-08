@@ -108,6 +108,7 @@ node('worker') {
         These are the top level pipeline jobs.
         */
             def scriptFolderPath = (params.SCRIPT_FOLDER_PATH) ?: DEFAULTS_JSON['scriptDirectories']['upstream']
+            println scriptFolderPath
 
             if (!fileExists(scriptFolderPath)) {
                 println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
@@ -122,6 +123,7 @@ node('worker') {
         These define what the default set of nightlies will be.
         */
             def nightlyFolderPath = (params.NIGHTLY_FOLDER_PATH) ?: DEFAULTS_JSON['configDirectories']['nightly']
+            println "nightlyFolderPath ===== ${nightlyFolderPath}"
 
             if (!fileExists(nightlyFolderPath)) {
                 println "[WARNING] ${nightlyFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
