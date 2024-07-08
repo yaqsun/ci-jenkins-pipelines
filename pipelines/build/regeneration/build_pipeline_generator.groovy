@@ -109,15 +109,15 @@ node('worker') {
         */
             def scriptFolderPath = (params.SCRIPT_FOLDER_PATH) ?: DEFAULTS_JSON['scriptDirectories']['upstream']
             println scriptFolderPath
-
+/*
             if (!fileExists(scriptFolderPath)) {
-        println "*****************************1"
                 println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
                 checkoutAdoptPipelines()
                 scriptFolderPath = ADOPT_DEFAULTS_JSON['scriptDirectories']['upstream']
                 println "[SUCCESS] The path is now ${scriptFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
                 checkoutUserPipelines()
             }
+*/
         println "*****************************"
 
         /*
