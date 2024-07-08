@@ -76,17 +76,19 @@ node('worker') {
             //}
 
             // Checkout into user repository
-            //try {
+            try {
             //checkoutUserPipelines()
             println "checkoutUserPipelines() ======= 11111"
             def stash = checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
                 userRemoteConfigs: [ remoteConfigs ]
             ])
-            //println "Checked out commit: ${stash.GIT_COMMIT}"
-            //} catch (IOException e) {
-            //   e.printStackTrace();
-            //}
+            println "Checked out commit: ${stash.GIT_COMMIT}"
+            } catch (IOException e) {
+               println "================= IOException e"
+               println "Checked out commit: ${stash.GIT_COMMIT}"
+               e.printStackTrace();
+            }
             println "checkoutUserPipelines() ======= successful"
 
             String helperRef = DEFAULTS_JSON['repository']['helper_ref']
