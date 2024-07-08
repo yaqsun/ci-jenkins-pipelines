@@ -48,7 +48,7 @@ node('worker') {
             ])
         }
          
-        sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
+        //sh "ls /home/jenkins-slave/jenkins-node/workspace/build-scripts/utils"
         println "checkoutUserPipelines() ======= 11111"
         //timestamps {
             def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
