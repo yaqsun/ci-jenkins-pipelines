@@ -95,9 +95,10 @@ node('worker') {
             try {
             library(identifier: "openjdk-jenkins-helper@${helperRef}")
             } catch (Exception e) {
+            println "checkoutUserPipelines() ======= successful22222"
                e.printStackTrace();
             }
-            println "checkoutUserPipelines() ======= successful22222"
+            println "checkoutUserPipelines() ======= successful33333"
 
             // Load jobRoot. This is where the openjdkxx-pipeline jobs will be created.
             def jobRoot = (params.JOB_ROOT) ?: DEFAULTS_JSON['jenkinsDetails']['rootDirectory']
