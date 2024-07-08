@@ -84,7 +84,7 @@ node('worker') {
             //    userRemoteConfigs: [ remoteConfigs ]
             //])
             //println "Checked out commit: ${stash.GIT_COMMIT}"
-            } catch (IOException e) {
+            } catch (Exception e) {
                println "================= IOException e"
                //println "Checked out commit: ${stash.GIT_COMMIT}"
                e.printStackTrace();
