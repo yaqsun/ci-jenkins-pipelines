@@ -79,10 +79,10 @@ node('worker') {
             //try {
             checkoutUserPipelines()
             println "checkoutUserPipelines() ======= 11111"
-            //def stash = checkout([$class: 'GitSCM',
-            //    branches: [ [ name: repoBranch ] ],
-            //    userRemoteConfigs: [ remoteConfigs ]
-            //])
+            def stash = checkout([$class: 'GitSCM',
+                branches: [ [ name: repoBranch ] ],
+                userRemoteConfigs: [ remoteConfigs ]
+            ])
             //println "Checked out commit: ${stash.GIT_COMMIT}"
             //} catch (IOException e) {
             //   e.printStackTrace();
