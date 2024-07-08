@@ -88,6 +88,7 @@ node('worker') {
                println "================= IOException e"
                //println "Checked out commit: ${stash.GIT_COMMIT}"
                e.printStackTrace();
+            println "checkoutUserPipelines() ======= successful11111eeeeeeeee"
             }
             println "checkoutUserPipelines() ======= successful"
 
@@ -97,6 +98,7 @@ node('worker') {
             } catch (Exception e) {
             println "checkoutUserPipelines() ======= successful22222"
                e.printStackTrace();
+            println "checkoutUserPipelines() ======= successful22222eeeeeeeee"
             }
             println "checkoutUserPipelines() ======= successful33333"
 
