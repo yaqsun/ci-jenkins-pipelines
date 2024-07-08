@@ -98,6 +98,7 @@ node('worker') {
             library(identifier: "openjdk-jenkins-helper@${helperRef}")
             } catch (Exception e2) {
             println "checkoutUserPipelines() ======= successful22222"
+               echo "检出代码时发生错误: ${e2.getMessage()}"
                e2.printStackTrace();
             println "checkoutUserPipelines() ======= successful22222eeeeeeeee"
             }
@@ -123,6 +124,7 @@ node('worker') {
                 //checkoutUserPipelines()
             }
             } catch (IOException e3) {
+               echo "检出代码时发生错误: ${e3.getMessage()}"
             println "checkoutUserPipelines() ======= successful44444"
                e3.printStackTrace();
             }
