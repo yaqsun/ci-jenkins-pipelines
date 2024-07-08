@@ -117,6 +117,7 @@ node('worker') {
                 println "[SUCCESS] The path is now ${scriptFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
                 checkoutUserPipelines()
             }
+        println "*****************************"
 
         /*
         Load nightlyFolderPath. This is the folder where the configurations/jdkxx_pipeline_config.groovy code is located compared to the repository root.
