@@ -21,7 +21,7 @@ node('worker') {
         }
          //getAdopt.setRequestMethod('GET')
          //getAdopt.connect()
-        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         //getAdopt.disconnect()
         //def getAdopt = null
         //URL getAdoptUrl  = new URL(ADOPT_DEFAULTS_FILE_URL)
