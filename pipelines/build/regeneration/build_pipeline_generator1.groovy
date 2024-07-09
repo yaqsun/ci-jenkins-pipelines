@@ -22,9 +22,9 @@ node('worker') {
         // } catch (IOException e) {
         //e.printStackTrace();
         //}
-       //def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
-       //println TEST_CONF
-       //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
+       def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
+       println TEST_CONF
+       Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
        //def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
 /*
          Map<String, ?> ADOPT_DEFAULTS_JSON = [:]
@@ -34,7 +34,7 @@ node('worker') {
         e.printStackTrace();
         }
 */
-/*
+
         if (!ADOPT_DEFAULTS_JSON || !Map.isInstance(ADOPT_DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No ADOPT_DEFAULTS_JSON found at ${ADOPT_DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file. NOTE: Since this adopt's defaults and unlikely to change location, this is likely a network or GitHub issue.")
         }
@@ -46,7 +46,7 @@ node('worker') {
         if (!DEFAULTS_JSON || !Map.isInstance(DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
         }
-*/
+
 
         Map remoteConfigs = [:]
         def repoBranch = null
