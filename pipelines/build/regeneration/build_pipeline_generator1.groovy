@@ -15,6 +15,7 @@ node('worker') {
          getAdopt.setRequestMethod('GET')
          getAdopt.connect()
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        getAdopt.close()
         //def getAdopt = null
         //URL getAdoptUrl  = new URL(ADOPT_DEFAULTS_FILE_URL)
         //def getAdopt = getAdoptUrl.openConnection()
@@ -99,7 +100,6 @@ node('worker') {
 */
             // Checkout into user repository
             checkoutUserPipelines()
-         getAdopt = null
        //}
 //    } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
