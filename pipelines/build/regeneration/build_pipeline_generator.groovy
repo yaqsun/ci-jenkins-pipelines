@@ -165,9 +165,10 @@ node('worker') {
             } catch (IOException e7) {
                echo "检出代码时发生错误: ${e7.getMessage()}"
             println "checkoutUserPipelines() ======= successful7777"
-               e3.printStackTrace();
+               e7.printStackTrace();
             }
 
+            println "checkoutUserPipelines() ======= successful8888"
             // Load enablePipelineSchedule. This determines whether we will be generating the pipelines with a schedule (defined in jdkxx.groovy) or not.
             Boolean enablePipelineSchedule = false
             if (params.ENABLE_PIPELINE_SCHEDULE) {
