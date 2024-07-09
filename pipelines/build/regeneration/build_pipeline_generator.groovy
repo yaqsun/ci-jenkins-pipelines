@@ -199,6 +199,7 @@ node('worker') {
             println "library() ======= successful7777"
                e7.printStackTrace();
             }
+            println JobHelper
             println 'Querying Adopt Api for the JDK-Head number (tip_version)...'
 
             def response = null
