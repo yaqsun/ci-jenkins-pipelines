@@ -191,11 +191,20 @@ node('worker') {
             println "USE_ADOPT_SHELL_SCRIPTS = $useAdoptShellScripts"
 
             // Collect available JDK versions to check for generation (tip_version + 1 just in case it is out of date on a release day)
-            def JobHelper = library(identifier: "openjdk-jenkins-helper@${helperRef}").JobHelper
+            def JobHelper = null;
+            try {
+            JobHelper = library(identifier: "openjdk-jenkins-helper@${helperRef}").JobHelper
+            } catch (IOException e7) {
+               echo "检出代码时发生错误: ${e7.getMessage()}"
+            println "library() ======= successful7777"
+               e7.printStackTrace();
+            }
             println 'Querying Adopt Api for the JDK-Head number (tip_version)...'
 
             def response = JobHelper.getAvailableReleases(this)
+            println response
             int headVersion = (int) response[('tip_version')]
+            println headVersion
             //}
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
