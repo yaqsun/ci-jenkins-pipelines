@@ -99,6 +99,7 @@ node('worker') {
             }
 */
             // Checkout into user repository
+            @NonCPS
             checkoutUserPipelines()
        //}
 //    } finally {
