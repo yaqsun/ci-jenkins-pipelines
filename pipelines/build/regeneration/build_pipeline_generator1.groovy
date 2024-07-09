@@ -10,9 +10,9 @@ node('worker') {
 //    try {
         // Pull in Adopt defaults
         //String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
-        ////String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
-        ////def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
-        ////Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
+        def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         //def getAdopt = null
         //URL getAdoptUrl  = new URL(ADOPT_DEFAULTS_FILE_URL)
         //def getAdopt = getAdoptUrl.openConnection()
@@ -22,10 +22,10 @@ node('worker') {
         // } catch (IOException e) {
         //e.printStackTrace();
         //}
-       def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
-       println TEST_CONF
-       Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-       println ADOPT_DEFAULTS_JSON
+       //def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
+       //println TEST_CONF
+       //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
+       //println ADOPT_DEFAULTS_JSON
        //def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
 /*
          Map<String, ?> ADOPT_DEFAULTS_JSON = [:]
@@ -35,7 +35,7 @@ node('worker') {
         e.printStackTrace();
         }
 */
-/*
+
         if (!ADOPT_DEFAULTS_JSON || !Map.isInstance(ADOPT_DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No ADOPT_DEFAULTS_JSON found at ${ADOPT_DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file. NOTE: Since this adopt's defaults and unlikely to change location, this is likely a network or GitHub issue.")
         }
@@ -47,7 +47,7 @@ node('worker') {
         if (!DEFAULTS_JSON || !Map.isInstance(DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
         }
-*/
+
 
         Map remoteConfigs = [:]
         def repoBranch = null
