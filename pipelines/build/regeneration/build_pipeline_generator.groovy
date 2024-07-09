@@ -11,13 +11,15 @@ node('worker') {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
         //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
-        def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
-        println getAdopt
+        //def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
+        //println getAdopt
         //println getAdopt.getInputStream().getText()
-        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
+        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
         println ADOPT_DEFAULTS_JSON
-        getAdopt = null
-        println getAdopt
+        //getAdopt = null
+        //println getAdopt
         if (!ADOPT_DEFAULTS_JSON || !Map.isInstance(ADOPT_DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No ADOPT_DEFAULTS_JSON found at ${ADOPT_DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file. NOTE: Since this adopt's defaults and unlikely to change location, this is likely a network or GitHub issue.")
         }
