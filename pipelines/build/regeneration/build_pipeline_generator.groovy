@@ -174,6 +174,21 @@ node('worker') {
             if (params.ENABLE_PIPELINE_SCHEDULE) {
                 enablePipelineSchedule = true
             }
+            // Load useAdoptShellScripts. This determines whether we will checkout to adopt's repository before running make-adopt-build-farm.sh or if we use the user's bash scripts.
+            Boolean useAdoptShellScripts = false
+            if (params.USE_ADOPT_SHELL_SCRIPTS) {
+                useAdoptShellScripts = true
+            }
+
+            println '[INFO] Running generator script with the following configuration:'
+            println "REPOSITORY_URL = $repoUri"
+            println "REPOSITORY_BRANCH = $repoBranch"
+            println "JOB_ROOT = $jobRoot"
+            println "SCRIPT_FOLDER_PATH = $scriptFolderPath"
+            println "NIGHTLY_FOLDER_PATH = $nightlyFolderPath"
+            println "JOB_TEMPLATE_PATH = $jobTemplatePath"
+            println "ENABLE_PIPELINE_SCHEDULE = $enablePipelineSchedule"
+            println "USE_ADOPT_SHELL_SCRIPTS = $useAdoptShellScripts"
 
             //}
     } finally {
