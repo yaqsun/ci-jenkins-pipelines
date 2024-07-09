@@ -96,7 +96,7 @@ node('worker') {
             }
 */
             // Checkout into user repository
-            //checkoutUserPipelines()
+            checkoutUserPipelines()
        //}
 //    } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
