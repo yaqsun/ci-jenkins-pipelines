@@ -64,8 +64,8 @@ node('worker') {
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
-            //remoteConfigs = [ url: "https://github.com/yaqsun/ci-jenkins-pipelines.git" ]
-            //repoBranch = "master"
+            remoteConfigs = [ url: "https://github.com/yaqsun/ci-jenkins-pipelines.git" ]
+            repoBranch = "master"
         def checkoutUserPipelines = { ->
             checkout([$class: 'GitSCM',
                 branches: [ [ name: repoBranch ] ],
@@ -79,12 +79,12 @@ node('worker') {
             //def generatedPipelines = []
 
             // Load git url and branch and gitBranch. These determine where we will be pulling user configs from.
-            def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
-            repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
+            //def repoUri = (params.REPOSITORY_URL) ?: DEFAULTS_JSON['repository']['pipeline_url']
+            //repoBranch = (params.REPOSITORY_BRANCH) ?: DEFAULTS_JSON['repository']['pipeline_branch']
 
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             //def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
-            remoteConfigs = [ url: repoUri ]
+            //remoteConfigs = [ url: repoUri ]
 /*
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
