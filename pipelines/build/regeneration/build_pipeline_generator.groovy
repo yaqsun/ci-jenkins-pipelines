@@ -190,6 +190,12 @@ node('worker') {
             println "ENABLE_PIPELINE_SCHEDULE = $enablePipelineSchedule"
             println "USE_ADOPT_SHELL_SCRIPTS = $useAdoptShellScripts"
 
+            // Collect available JDK versions to check for generation (tip_version + 1 just in case it is out of date on a release day)
+            def JobHelper = library(identifier: "openjdk-jenkins-helper@${helperRef}").JobHelper
+            println 'Querying Adopt Api for the JDK-Head number (tip_version)...'
+
+            def response = JobHelper.getAvailableReleases(this)
+            int headVersion = (int) response[('tip_version')]
             //}
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
