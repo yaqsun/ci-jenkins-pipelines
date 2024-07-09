@@ -63,7 +63,6 @@ node('worker') {
     /*
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
-/*
             remoteConfigs = [ url: "https://github.com/yaqsun/ci-jenkins-pipelines.git" ]
             repoBranch = "master"
         def checkoutUserPipelines = { ->
@@ -74,7 +73,6 @@ node('worker') {
             //git branch: 'master', url: 'https://github.com/yaqsun/ci-jenkins-pipelines.git'
             //sh "git log -4"
         }
-*/
         //timestamps {
             //def retiredVersions = [9, 10, 12, 13, 14, 15, 16, 18, 19, 20]
             //def generatedPipelines = []
@@ -95,7 +93,7 @@ node('worker') {
             }
 */
             // Checkout into user repository
-            //checkoutUserPipelines()
+            checkoutUserPipelines()
        //}
 //    } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
