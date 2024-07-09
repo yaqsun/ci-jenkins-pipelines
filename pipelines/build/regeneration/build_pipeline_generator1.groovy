@@ -14,7 +14,7 @@ node('worker') {
         def getAdopt = null
         try {
         println "''''''''''''''''''''''''''"
-        getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
+        //getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
          } catch (IOException e) {
            println "================="
         e.printStackTrace();
