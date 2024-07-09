@@ -15,6 +15,7 @@ node('worker') {
         try {
         getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
          } catch (IOException e) {
+           println "================="
         e.printStackTrace();
         }
          //getAdopt.setRequestMethod('GET')
