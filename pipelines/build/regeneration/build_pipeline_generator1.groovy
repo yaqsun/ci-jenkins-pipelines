@@ -106,7 +106,19 @@ node('worker') {
             }
 */
             // Checkout into user repository
-            checkoutUserPipelines()
+            //checkoutUserPipelines()
+            def scriptFolderPath = (params.SCRIPT_FOLDER_PATH) ?: DEFAULTS_JSON['scriptDirectories']['upstream']
+            println scriptFolderPath
+            //println fileExists(scriptFolderPath)
+            //try {
+            if (!fileExists(scriptFolderPath)) {
+        println "*****************************"
+                //println "[WARNING] ${scriptFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
+                //checkoutAdoptPipelines()
+                //scriptFolderPath = ADOPT_DEFAULTS_JSON['scriptDirectories']['upstream']
+                //println "[SUCCESS] The path is now ${scriptFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
+                //checkoutUserPipelines()
+            }
        //}
 //    } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
