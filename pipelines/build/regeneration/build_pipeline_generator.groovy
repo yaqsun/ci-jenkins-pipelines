@@ -45,10 +45,11 @@ node('worker') {
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
         def checkoutUserPipelines = { ->
-            checkout([$class: 'GitSCM',
-                branches: [ [ name: repoBranch ] ],
-                userRemoteConfigs: [ remoteConfigs ]
-            ])
+              println "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+//            checkout([$class: 'GitSCM',
+//                branches: [ [ name: repoBranch ] ],
+//                userRemoteConfigs: [ remoteConfigs ]
+//            ])
         }
 
         timestamps {
