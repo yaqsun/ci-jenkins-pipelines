@@ -128,6 +128,21 @@ node('worker') {
             println "checkoutUserPipelines() ======= successful44444"
                e3.printStackTrace();
             }
+        /*
+        Load nightlyFolderPath. This is the folder where the configurations/jdkxx_pipeline_config.groovy code is located compared to the repository root.
+        These define what the default set of nightlies will be.
+        */
+            def nightlyFolderPath = (params.NIGHTLY_FOLDER_PATH) ?: DEFAULTS_JSON['configDirectories']['nightly']
+            println "nightlyFolderPath ===== ${nightlyFolderPath}"
+
+            if (!fileExists(nightlyFolderPath)) {
+                println "[WARNING] ${nightlyFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
+                checkoutAdoptPipelines()
+                nightlyFolderPath = ADOPT_DEFAULTS_JSON['configDirectories']['nightly']
+                println "[SUCCESS] The path is now ${nightlyFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
+                checkoutUserPipelines()
+            }
+
             //}
     } finally {
         // Always clean up, even on failure (doesn't delete the created jobs)
