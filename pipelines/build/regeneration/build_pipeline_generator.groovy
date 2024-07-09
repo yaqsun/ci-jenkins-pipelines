@@ -195,11 +195,11 @@ node('worker') {
             try {
             JobHelper = library(identifier: "openjdk-jenkins-helper@${helperRef}").JobHelper
             } catch (IOException e7) {
-               echo "检出代码时发生错误: ${e7.getMessage()}"
+               echo "library.JobHelper: ${e7.getMessage()}"
+            println JobHelper
             println "library() ======= successful7777"
                e7.printStackTrace();
             }
-            println JobHelper
             println 'Querying Adopt Api for the JDK-Head number (tip_version)...'
 
             def response = null
