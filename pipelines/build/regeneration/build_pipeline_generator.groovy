@@ -153,13 +153,19 @@ node('worker') {
         This actually sets up the pipeline job using the parameters above.
         */
             def jobTemplatePath = (params.JOB_TEMPLATE_PATH) ?: DEFAULTS_JSON['templateDirectories']['upstream']
-
+            println jobTemplatePath
+            try {
             if (!fileExists(jobTemplatePath)) {
                 println "[WARNING] ${jobTemplatePath} does not exist in your chosen repository. Updating it to use Adopt's instead"
                 checkoutAdoptPipelines()
                 jobTemplatePath = ADOPT_DEFAULTS_JSON['templateDirectories']['upstream']
                 println "[SUCCESS] The path is now ${jobTemplatePath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
                 checkoutUserPipelines()
+            }
+            } catch (IOException e7) {
+               echo "检出代码时发生错误: ${e7.getMessage()}"
+            println "checkoutUserPipelines() ======= successful7777"
+               e3.printStackTrace();
             }
 
             // Load enablePipelineSchedule. This determines whether we will be generating the pipelines with a schedule (defined in jdkxx.groovy) or not.
