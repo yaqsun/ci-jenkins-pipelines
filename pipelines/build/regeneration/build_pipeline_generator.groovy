@@ -135,12 +135,18 @@ node('worker') {
             def nightlyFolderPath = (params.NIGHTLY_FOLDER_PATH) ?: DEFAULTS_JSON['configDirectories']['nightly']
             println "nightlyFolderPath ===== ${nightlyFolderPath}"
 
+            try {
             if (!fileExists(nightlyFolderPath)) {
                 println "[WARNING] ${nightlyFolderPath} does not exist in your chosen repository. Updating it to use Adopt's instead"
                 checkoutAdoptPipelines()
                 nightlyFolderPath = ADOPT_DEFAULTS_JSON['configDirectories']['nightly']
                 println "[SUCCESS] The path is now ${nightlyFolderPath} relative to ${ADOPT_DEFAULTS_JSON['repository']['pipeline_url']}"
                 checkoutUserPipelines()
+            }
+            } catch (IOException e3) {
+               echo "检出代码时发生错误: ${e3.getMessage()}"
+            println "checkoutUserPipelines() ======= successful44444"
+               e3.printStackTrace();
             }
 
             //}
