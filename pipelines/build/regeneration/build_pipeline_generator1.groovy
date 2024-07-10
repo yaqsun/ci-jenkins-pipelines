@@ -9,8 +9,90 @@ file used as jenkinsfile to generator nightly and weekly pipeline
 node('worker') {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
-        def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
-        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        //def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
+        String TEST_CONF = '{ \
+    "repository"             : { \
+        "build_url"          : "https://github.com/adoptium/temurin-build.git", \
+        "build_branch"       : "master", \
+        "test_dirs"          : "/test/functional", \
+        "pipeline_url"       : "https://github.com/adoptium/ci-jenkins-pipelines.git", \
+        "pipeline_branch"    : "master", \
+        "helper_ref"         : "master" \
+    }, \
+    "jenkinsDetails"         : { \
+        "rootUrl"            : "https://ci.adoptium.net", \
+        "rootDirectory"      : "build-scripts" \
+    }, \
+    "templateDirectories" : { \
+        "downstream"         : "pipelines/build/common/create_job_from_template.groovy", \
+        "upstream"           : "pipelines/jobs/pipeline_job_template.groovy", \
+        "weekly"             : "pipelines/jobs/weekly_release_pipeline_job_template.groovy", \
+        "release"            : "pipelines/jobs/release_pipeline_job_template.groovy" \
+    }, \
+    "configDirectories"      : { \
+        "build"              : "pipelines/jobs/configurations", \
+        "nightly"            : "pipelines/jobs/configurations", \
+        "release"            : "pipelines/jobs/configurations", \
+        "evaluation"          : "pipelines/jobs/configurations", \
+        "platform"           : "build-farm/platform-specific-configurations" \
+    }, \
+    "scriptDirectories"      : { \
+        "upstream"           : "pipelines/build", \
+        "downstream"         : "pipelines/build/common/kick_off_build.groovy", \
+        "weekly"             : "pipelines/build/common/weekly_release_pipeline.groovy", \
+        "regeneration"       : "pipelines/build/common/config_regeneration.groovy", \
+        "tester"             : "pipelines/build/prTester/pr_test_pipeline.groovy", \
+        "buildfarm"          : "build-farm/make-adopt-build-farm.sh" \
+    }, \
+    "baseFileDirectories": { \
+        "upstream"           : "pipelines/build/common/build_base_file.groovy", \
+        "downstream"         : "pipelines/build/common/openjdk_build_pipeline.groovy" \
+    }, \
+    "testDetails"            : { \
+        "enableReproducibleCompare" : false, \
+        "enableTests"        : true, \
+        "nightlyDefault"     : [ \
+            "sanity.openjdk", \
+            "sanity.system", \
+            "extended.system", \
+            "sanity.perf", \
+            "sanity.functional", \
+            "extended.functional" \
+        ], \
+        "weeklyDefault"     : [ \
+            "sanity.openjdk", \
+            "sanity.system", \
+            "extended.system", \
+            "sanity.perf", \
+            "sanity.functional", \
+            "extended.functional", \
+            "extended.openjdk", \
+            "extended.perf", \
+            "special.functional", \
+            "special.openjdk", \
+            "dev.functional" \
+        ], \
+        "releaseDefault"     : [ \
+            "sanity.openjdk", \
+            "sanity.system", \
+            "extended.system", \
+            "sanity.perf", \
+            "sanity.functional", \
+            "extended.functional", \
+            "extended.openjdk", \
+            "extended.perf", \
+            "special.functional" \
+        ], \
+        "enableTestDynamicParallel"      : true, \
+        "defaultDynamicParas": { \
+            "testLists"      : ["extended.openjdk"], \
+            "numMachines"    : ["3"] \
+        } \
+    }, \
+    "defaultsUrl"            : "https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json" \
+}'
+        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
 //    try {
         // Pull in Adopt defaults
 /*
