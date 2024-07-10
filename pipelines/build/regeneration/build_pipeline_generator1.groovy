@@ -5,9 +5,10 @@ import groovy.json.JsonOutput
 /* 
 file used as jenkinsfile to generator nightly and weekly pipeline
 */
-
+def ADOPT_DEFAULTS_JSON
 node('worker') {
 parepre()
+println ADOPT_DEFAULTS_JSON
 //    try {
         // Pull in Adopt defaults
 /*
@@ -223,6 +224,6 @@ def parepre() {
 }'
         //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
 //        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-        def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
+        ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
 }
 
