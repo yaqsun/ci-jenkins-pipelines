@@ -15,7 +15,87 @@ node('worker') {
         //println getAdopt
         //println getAdopt.getInputStream().getText()
         //def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
-        String TEST_CONF = '{baseFileDirectories={downstream=pipelines/build/common/openjdk_build_pipeline.groovy, upstream=pipelines/build/common/build_base_file.groovy}, configDirectories={build=pipelines/jobs/configurations, evaluation=pipelines/jobs/configurations, nightly=pipelines/jobs/configurations, platform=build-farm/platform-specific-configurations, release=pipelines/jobs/configurations}, defaultsUrl=https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json, jenkinsDetails={rootDirectory=build-scripts, rootUrl=https://ci.adoptium.net}, repository={build_branch=master, build_url=https://github.com/adoptium/temurin-build.git, helper_ref=master, pipeline_branch=master, pipeline_url=https://github.com/adoptium/ci-jenkins-pipelines.git, test_dirs=/test/functional}, scriptDirectories={buildfarm=build-farm/make-adopt-build-farm.sh, downstream=pipelines/build/common/kick_off_build.groovy, regeneration=pipelines/build/common/config_regeneration.groovy, tester=pipelines/build/prTester/pr_test_pipeline.groovy, upstream=pipelines/build, weekly=pipelines/build/common/weekly_release_pipeline.groovy}, templateDirectories={downstream=pipelines/build/common/create_job_from_template.groovy, release=pipelines/jobs/release_pipeline_job_template.groovy, upstream=pipelines/jobs/pipeline_job_template.groovy, weekly=pipelines/jobs/weekly_release_pipeline_job_template.groovy}, testDetails={defaultDynamicParas={numMachines=[3], testLists=[extended.openjdk]}, enableReproducibleCompare=false, enableTestDynamicParallel=true, enableTests=true, nightlyDefault=[sanity.openjdk, sanity.system, extended.system, sanity.perf, sanity.functional, extended.functional], releaseDefault=[sanity.openjdk, sanity.system, extended.system, sanity.perf, sanity.functional, extended.functional, extended.openjdk, extended.perf, special.functional], weeklyDefault=[sanity.openjdk, sanity.system, extended.system, sanity.perf, sanity.functional, extended.functional, extended.openjdk, extended.perf, special.functional, special.openjdk, dev.functional]}}'
+        String TEST_CONF = '{
+    "repository"             : {
+        "build_url"          : "https://github.com/adoptium/temurin-build.git",
+        "build_branch"       : "master",
+        "test_dirs"          : "/test/functional",
+        "pipeline_url"       : "https://github.com/adoptium/ci-jenkins-pipelines.git",
+        "pipeline_branch"    : "master",
+        "helper_ref"         : "master"
+    },
+    "jenkinsDetails"         : {
+        "rootUrl"            : "https://ci.adoptium.net",
+        "rootDirectory"      : "build-scripts"
+    },
+    "templateDirectories" : {
+        "downstream"         : "pipelines/build/common/create_job_from_template.groovy",
+        "upstream"           : "pipelines/jobs/pipeline_job_template.groovy",
+        "weekly"             : "pipelines/jobs/weekly_release_pipeline_job_template.groovy",
+        "release"            : "pipelines/jobs/release_pipeline_job_template.groovy"
+    },
+    "configDirectories"      : {
+        "build"              : "pipelines/jobs/configurations",
+        "nightly"            : "pipelines/jobs/configurations",
+        "release"            : "pipelines/jobs/configurations",
+        "evaluation"          : "pipelines/jobs/configurations",
+        "platform"           : "build-farm/platform-specific-configurations"
+    },
+    "scriptDirectories"      : {
+        "upstream"           : "pipelines/build",
+        "downstream"         : "pipelines/build/common/kick_off_build.groovy",
+        "weekly"             : "pipelines/build/common/weekly_release_pipeline.groovy",
+        "regeneration"       : "pipelines/build/common/config_regeneration.groovy",
+        "tester"             : "pipelines/build/prTester/pr_test_pipeline.groovy",
+        "buildfarm"          : "build-farm/make-adopt-build-farm.sh"
+    },
+    "baseFileDirectories": {
+        "upstream"           : "pipelines/build/common/build_base_file.groovy",
+        "downstream"         : "pipelines/build/common/openjdk_build_pipeline.groovy"
+    },
+    "testDetails"            : {
+        "enableReproducibleCompare" : false,
+        "enableTests"        : true,
+        "nightlyDefault"     : [
+            "sanity.openjdk",
+            "sanity.system",
+            "extended.system",
+            "sanity.perf",
+            "sanity.functional",
+            "extended.functional"
+        ],
+        "weeklyDefault"     : [
+            "sanity.openjdk",
+            "sanity.system",
+            "extended.system",
+            "sanity.perf",
+            "sanity.functional",
+            "extended.functional",
+            "extended.openjdk",
+            "extended.perf",
+            "special.functional",
+            "special.openjdk",
+            "dev.functional"
+        ],
+        "releaseDefault"     : [
+            "sanity.openjdk",
+            "sanity.system",
+            "extended.system",
+            "sanity.perf",
+            "sanity.functional",
+            "extended.functional",
+            "extended.openjdk",
+            "extended.perf",
+            "special.functional"
+        ],
+        "enableTestDynamicParallel"      : true,
+        "defaultDynamicParas": {
+            "testLists"      : ["extended.openjdk"],
+            "numMachines"    : ["3"]
+        }
+    },
+    "defaultsUrl"            : "https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json"
+}'
         //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
         println ADOPT_DEFAULTS_JSON
