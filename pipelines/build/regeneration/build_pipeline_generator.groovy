@@ -16,7 +16,7 @@ node('worker') {
         //println getAdopt.getInputStream().getText()
         def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
         //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
-        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.prettyPrint(JsonOutput.toJson(buildConf))) as Map
         //Map<String, ?> ADOPT_DEFAULTS_JSON = JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
         //println ADOPT_DEFAULTS_JSON
 
@@ -31,7 +31,7 @@ node('worker') {
         String DEFAULTS_FILE_URL = (params.DEFAULTS_URL) ?: ADOPT_DEFAULTS_FILE_URL
         //def getUser = new URL(DEFAULTS_FILE_URL).openConnection()
         //Map<String, ?> DEFAULTS_JSON = new JsonSlurper().parseText(getUser.getInputStream().getText()) as Map
-        Map<String, ?> DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
+        Map<String, ?> DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.prettyPrint(JsonOutput.toJson(buildConf))) as Map
         //def DEFAULTS_JSON = readJSON file: "${WORKSPACE}/ci-jenkins-pipelines/master/pipelines/defaults.json"
         if (!DEFAULTS_JSON || !Map.isInstance(DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
