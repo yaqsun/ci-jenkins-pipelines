@@ -8,7 +8,6 @@ file used as jenkinsfile to generator nightly and weekly pipeline
 def ADOPT_DEFAULTS_JSON
 node('worker') {
 parepre()
-println ADOPT_DEFAULTS_JSON
 //    try {
         // Pull in Adopt defaults
 /*
