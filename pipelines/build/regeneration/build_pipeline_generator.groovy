@@ -14,7 +14,7 @@ node('worker') {
         //def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         //println getAdopt
         //println getAdopt.getInputStream().getText()
-        //def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
+        def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
         //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
         //Map<String, ?> ADOPT_DEFAULTS_JSON = JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
