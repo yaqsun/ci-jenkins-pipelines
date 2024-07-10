@@ -223,7 +223,8 @@ def parepre() {
 }'
         //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
 //        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-       def  ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-       println ADOPT_DEFAULTS_JSON 
+       //def  ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
+       //println ADOPT_DEFAULTS_JSON 
+       println JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
 }
 
