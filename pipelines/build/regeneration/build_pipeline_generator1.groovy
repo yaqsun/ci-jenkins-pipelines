@@ -38,9 +38,9 @@ node('worker') {
         // } catch (IOException e) {
         //e.printStackTrace();
         //}
-       def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
-       println TEST_CONF
-       println JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
+       //def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
+       //println TEST_CONF
+       //println JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
        //println ADOPT_DEFAULTS_JSON
        //def ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
