@@ -11,9 +11,10 @@ node('worker') {
 //    try {
         // Pull in Adopt defaults
  def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
-        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
         //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(TEST_CONF) as Map
-Map<String, ?> ADOPT_DEFAULTS_JSON = slurpJSON(TEST_CONF)
+//Map<String, ?> ADOPT_DEFAULTS_JSON = slurpJSON(TEST_CONF)
 /*
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
         //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
