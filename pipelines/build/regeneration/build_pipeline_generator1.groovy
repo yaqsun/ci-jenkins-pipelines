@@ -234,6 +234,6 @@ def parepre() {
 }
 def slurpJSON(TEST_CONF) {
 
-return new JsonSlurper().parseText(TEST_CONF) as map;
+return new JsonSlurper().parseText(TEST_CONF);
 
 }
