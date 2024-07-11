@@ -11,12 +11,12 @@ node('worker') {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
         //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
-        //def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
+        def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
         //println getAdopt
         //println getAdopt.getInputStream().getText()
         def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
-        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
-        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
+        Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
+        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
         //Map<String, ?> ADOPT_DEFAULTS_JSON = JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
         //println ADOPT_DEFAULTS_JSON
 
