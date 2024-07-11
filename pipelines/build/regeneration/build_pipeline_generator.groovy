@@ -10,29 +10,16 @@ node('worker') {
     try {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
-        //String ADOPT_DEFAULTS_FILE_URL = 'http://sysdev.loongson.cn/attachments/download/94894/defaults.json'
         def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
-        //println getAdopt
-        //println getAdopt.getInputStream().getText()
-        def TEST_CONF = params.TEST_CONF ? params.TEST_CONF : ""
         Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
-        //Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
-        //Map<String, ?> ADOPT_DEFAULTS_JSON = JsonOutput.prettyPrint(JsonOutput.toJson(TEST_CONF))
-        //println ADOPT_DEFAULTS_JSON
-
-        //def ADOPT_DEFAULTS_JSON = readJSON file: "${WORKSPACE}/ci-jenkins-pipelines/master/pipelines/defaults.json"
-        //getAdopt = null
-        //println getAdopt
         if (!ADOPT_DEFAULTS_JSON || !Map.isInstance(ADOPT_DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No ADOPT_DEFAULTS_JSON found at ${ADOPT_DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file. NOTE: Since this adopt's defaults and unlikely to change location, this is likely a network or GitHub issue.")
         }
 
         // Pull in User defaults
         String DEFAULTS_FILE_URL = (params.DEFAULTS_URL) ?: ADOPT_DEFAULTS_FILE_URL
-        //def getUser = new URL(DEFAULTS_FILE_URL).openConnection()
-        //Map<String, ?> DEFAULTS_JSON = new JsonSlurper().parseText(getUser.getInputStream().getText()) as Map
-        Map<String, ?> DEFAULTS_JSON = new JsonSlurper().parseText(JsonOutput.toJson(TEST_CONF)) as Map
-        //def DEFAULTS_JSON = readJSON file: "${WORKSPACE}/ci-jenkins-pipelines/master/pipelines/defaults.json"
+        def getUser = new URL(DEFAULTS_FILE_URL).openConnection()
+        Map<String, ?> DEFAULTS_JSON = new JsonSlurper().parseText(getUser.getInputStream().getText()) as Map
         if (!DEFAULTS_JSON || !Map.isInstance(DEFAULTS_JSON)) {
             throw new Exception("[ERROR] No DEFAULTS_JSON found at ${DEFAULTS_FILE_URL} or it is not a valid JSON object. Please ensure this path is correct and leads to a JSON or Map object file.")
         }
@@ -54,11 +41,10 @@ node('worker') {
     Changes dir to the user's repo. Use closures as functions aren't accepted inside node blocks
     */
         def checkoutUserPipelines = { ->
-              println "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-//            checkout([$class: 'GitSCM',
-//                branches: [ [ name: repoBranch ] ],
-//                userRemoteConfigs: [ remoteConfigs ]
-//            ])
+            checkout([$class: 'GitSCM',
+                branches: [ [ name: repoBranch ] ],
+                userRemoteConfigs: [ remoteConfigs ]
+            ])
         }
 
         timestamps {
@@ -72,9 +58,6 @@ node('worker') {
             // Load credentials to be used in checking out. This is in case we are checking out a URL that is not Adopts and they don't have their ssh key on the machine.
             def checkoutCreds = (params.CHECKOUT_CREDENTIALS) ?: ''
             remoteConfigs = [ url: repoUri ]
-            println "repoUri === " + repoUri
-            println "repoBranch === " + repoBranch
-            println "remoteConfigs === " + remoteConfigs
             if (checkoutCreds != '') {
                 // NOTE: This currently does not work with user credentials due to https://issues.jenkins.io/browse/JENKINS-60349
                 remoteConfigs.put('credentials', "${checkoutCreds}")
