@@ -1,6 +1,6 @@
 import java.nio.file.NoSuchFileException
 import groovy.json.JsonSlurper
-import groGovy.json.JsonOutput
+import groovy.json.JsonOutput
 
 /* 
 file used as jenkinsfile to generator nightly and weekly pipeline
